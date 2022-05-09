@@ -1,5 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { StockTrackerComponent } from './stock-tracker.component';
 
 describe('StockTrackerComponent', () => {
@@ -8,7 +8,8 @@ describe('StockTrackerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StockTrackerComponent ]
+      declarations: [ StockTrackerComponent],
+      imports:[HttpClientModule]
     })
     .compileComponents();
   });
