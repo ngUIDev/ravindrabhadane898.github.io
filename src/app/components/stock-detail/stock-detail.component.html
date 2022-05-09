@@ -1,0 +1,41 @@
+<div class="row justify-content-center mt-4" *ngFor="let item of stockList">
+  <div class="col-md-8 col-sm-8 col-lg-8">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col text-start">
+            <div class="card-title"><strong>{{item.description}} ({{item.symbol}})</strong></div>
+          </div>
+          <div class="col text-end">
+            <button type="button" class="close" aria-label="Close" (click)="onClose(item.symbol)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div *ngIf="(item.percentChangeToday > 0) else downArrow" class="p-1 text-success">Change Today:
+              +{{item.percentChangeToday}}% <i class="bi bi-arrow-up text-success"></i></div>
+            <ng-template #downArrow>
+              <div class="p-1 text-danger">Change Today: {{item.percentChangeToday}}% <i
+                  class="bi bi-arrow-down text-danger"></i></div>
+            </ng-template>
+          </div>
+          <div class="col-4">
+            <div class="p-1">Opening Price: {{item.openingPrice | currency}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="p-1">Current Price: {{item.currentPrice | currency}}</div>
+          </div>
+          <div class="col-4">
+            <div class="p-1">High Price: {{item.highPrice | currency}}</div>
+          </div>
+        </div>
+        <a [routerLink]="['/sentiment',item.symbol]" [state]="{name:item.description}"
+          class="btn btn-primary active mt-4">Go to social sentiment details <i class="bi bi-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

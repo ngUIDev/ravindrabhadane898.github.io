@@ -1,0 +1,16 @@
+h5{
+    margin-left: 12rem;
+}
+
+.container{    
+    .btn-secondary{       
+       color: #fff;
+       background-color: #0a58ca;
+       border-color: #0a53be; 
+    }
+    .btn-secondary:disabled{      
+        color: #fff;
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+}

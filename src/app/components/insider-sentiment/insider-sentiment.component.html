@@ -1,0 +1,43 @@
+<app-spinner [loadingSpinner]="loadingSpinner" [height]="5" [width]="5"></app-spinner>
+<div *ngIf="insiderSentimentList.length > 0; else sentimentNotAvailable" class="row justify-content-center mt-4">
+    <div class="col-md-8 col-sm-8 col-lg-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col text-start">
+                        <div class="card-title"><strong>{{stockName}} ({{symbol}})</strong></div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-4 d-flex align-items-center" *ngFor="let item of insiderSentimentList">
+                        <div class="flex-1">
+                            <div>{{months[item.month - 1]}}</div>
+                            <div [ngClass]="(item.change > 0)? 'text-success' : 'text-danger'" class="pt-2">Change:
+                               {{item.change > 0? '+' : ''}}{{item.change }}</div>
+                            <div class="pt-2">MSPR: {{item.mspr}}</div>
+                        </div>
+                        <div class="arrow">
+                            <i [ngClass]="(item.change > 0)? 'bi-arrow-up text-success' : 'bi-arrow-down text-danger' "
+                                class="bi fs-1 fw-bold"></i>
+                        </div>
+                    </div>
+                </div>
+                <a [routerLink]="['']" class="btn btn-primary active mt-4"> <i class="bi bi-chevron-left"></i>Back to
+                    list of stocks</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #sentimentNotAvailable>
+    <div class="text-center mt-5" *ngIf="!loadingSpinner">
+        <div>
+            Past three months data is not available, Please back to list of stocks.
+        </div>
+        <div>
+            <a [routerLink]="['']" class="btn btn-primary active mt-4"> <i class="bi bi-chevron-left"></i>Back to
+                list of stocks</a>
+        </div>
+    </div>
+</ng-template>

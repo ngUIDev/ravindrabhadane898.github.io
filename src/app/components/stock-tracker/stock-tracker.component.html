@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="stockSearchForm" novalidate>
+    <h5 class="justify-content-center mt-4">Enter the symbol of stock to track (i.e AAPL,TSLA, GOOGL)</h5>
+    <div class="row justify-content-center mt-3 mb-4">
+      <div class="col-4">
+        <input type="text" id="stocksymbol" class="form-control" placeholder="Enter the symbol of stock to track"
+          formControlName="stocksymbol"
+          [ngClass]="{ 'is-invalid': stocksymbol?.errors && (stocksymbol?.touched || stocksymbol?.dirty)  }">
+        <div *ngIf="stocksymbol?.invalid && (stocksymbol?.dirty || stocksymbol?.touched)" class="text-danger text-center mt-2">          
+          <span *ngIf="stocksymbol?.errors?.required">Symbol is Required</span>
+          <span *ngIf="stocksymbol?.errors?.alreadyExists">Symbol is already exists in the Stock List</span>
+          <span *ngIf="stocksymbol?.errors?.maxlength">Stock Symbol must be 1-5 letter code</span>
+          <span *ngIf="stocksymbol?.errors?.invalidValue">Please Enter the Valid Symbol</span>
+        </div>
+      </div>
+      <div class="col-4">
+        <button type="submit" [disabled]="stockSearchForm.invalid" class="btn btn-secondary active mb-2"
+          (click)="onTrackStockSymbol()">Track Stock</button>
+      </div>
+    </div>
+  </form>
+ <app-spinner [loadingSpinner]="loadingSpinner" [height]="3" [width]="3"></app-spinner>
+  <ng-container *ngIf="stockListFromStorage.length>0">
+    <app-stock-detail (closeStockCard)="closeStock($event)" [stockList]="stockListFromStorage"></app-stock-detail>
+  </ng-container>
+</div>
